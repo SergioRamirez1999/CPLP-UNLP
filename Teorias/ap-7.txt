@@ -1,0 +1,247 @@
+#####TIPOS DE DATOS######
+
+##################
+#####CONCEPTO#####
+##################
+
+Podemos definir a un tipo como un conjunto de valores y un conjunto de operaciones que se pueden utilizar para manipularlos.
+
+Algunos Aspectos:
+-Organizacion de los datos a traves del concepto de tipo.
+-Forma de clasificar datos de acuerdo con diferentes categorias.
+-Mas que un conjunto de datos pues tienen un comportamiento semantico o sentido.
+
+######################################
+############PREDEFINIDOS##############
+######################################
+
+-Reflejan el comportamiento del hardware subyacente y son una abstraccion de el.
+-Las ventajas de los tipos predefinidos son:
+    #Invisibilidad de la representacion
+    #Verificacion estatica
+    #Desambiguar operadores
+    #Control de precision.
+
+
+######################################
+######DEFINIDOS POR EL USUARIO########
+######################################
+
+Los lenguajes de programacion permiten al programador especificar agrupaciones de objetos de datos elementales y, de forma recursiva, agregaciones de agregados. Esto se logra mediante la prestacion de una serie de constructores que permiten definir lo que denominamos tipo de dato definido por el usuario.
+
+Separan la especificacion de la implementacion. Se definen los tipos que el problema necesita.
+-Definir nuevos tipos e instanciarlos.
+-Chequeo de consistencia.
+
+Ventajas
+    -Legibilidad: eleccion apropiada de nuevos nombres.
+    -Estructura jerarquica de las definiciones de tipos: proceso de refinamiento (estructura Persona).
+    -Modificabilidad: solo se cambia en la definicion (cambios en un solo punto, la clase o la definicion del tipo).
+    -Factorizacion: Se usa la cantidad de veces necesarias.
+    -La instanciacion de los objetos en un tipo dado implica una descripcion abstracta de sus valores. Los detalles de la implementacion solo quedan en la definicion del tipo
+
+
+###COMPUESTOS - CONSTRUCTORES####
+-Producto cartesiano ---> Estructuras/Registros
+-Correspondencia Finita ---> Arreglos/Matrices
+-Union ---> Campos disjuntos (Enum?)
+-Recursion ---> Punteros
+
+Producto Cartesiano
+El producto cartesiano de n conjuntos A1, A2, ..., AN, denotado A1 x A2 x ... x AN, es un conjunto cuyos elementos estan ordenados n-tuplas (a1, a2,..., an), donde cada a sub i pertenece a A sub k. Por ejemplo, un poligono puede ser descritor por un numero entero (sus lados) y un real (longitud de cada borde).
+
+Ejemplo:
+- Lenguaje C: Estructuras
+
+typedef struct {                <---- definicion
+    int nro_lados;              <---- campos
+    float tamaño_lado;
+} reg_poligon;
+reg_poligon pol = {3, 3.45};   <---- INSTANCIACION (POSIBLES VALORES)
+pol.nro_lados = 4;             <---- Accesos a miembros mediante notacion puntual.
+
+Correspondencia Finita
+Es una funcion de una conjunto finito de valores de un tipo de dominio DT en valores de un tipo del dominio RT. "Conjunto de valores accesibles via un subindice"
+
+Ejemplo
+Listas, arreglos
+
+Union y Union discriminado
+La union / Union discriminadad de dos o mas tipo define un tipo como la disjuncion de los tipos dados (uno u otro).
+CAMPOS MUTUAMENTE EXCLUYENTES
+-Permite manipular diferentes tipos en distinto momento de la ejecucion
+-Chequeo dinamico.
+
+enum descriptor {valorA, valorB}
+
+union address {
+    short int offset;
+    long unsigned int absolute;
+}
+
+typedef struct {
+    address location;   <--- posibles valores offset ó absolute
+    descriptor kind;    <--- posibles valores valorA ó valorB
+}
+
+
+Union discriminada
+Agrega un discriminante para indicar la opcion elegida.
+"Si tenemos la union discriminada de dos conjuntos S y T, y aplicamos el discriminante a un elemento e perteneciente a la union discriminada devolvera S o T"
+-El elemento e debe manipularse de acuerdo al valor del discriminante
+-En la union y en la union discriminada el chequeo de tipos debe hacerse en ejecucion
+-La union discriminada se puede manejar en forma segura consultado el discriminante antes de utilizar el valor del elemento.
+
+Problemas:
+    -El discriminante y las variantes pueden manejarse independientemente uno de otros.
+    -La implementacion del lenguaje puede ignorar los chequeos
+    -Puede omitirse el discriminante, con lo cual anque se quisiera no se puede chequear.
+
+
+Recursion
+    Un tipo de dato recursivo T se define como una estructura que puede contener componentes del tipo T.
+#Define datos agrupados
+    -Cuyo tamaño puede crecer arbitrariamente
+    -Cuya estructura puede ser arbitrariamente compleja.
+
+Los lenguajes de programacion convencionales soportan la implementacion de los tipos de datos recursivos a traves de los punteros.
+-Un puntero es una referencia a un objeto.
+-Una variable puntero es una variable cuyo r-valor es una referencia a un objeto.
+
+
+######################################
+#############PUNTEROS#################
+######################################
+
+-Estructuras de tamaño arbitrario, numero de items no determinado: los punteros permiten conectar juntos muchos items sin tener un nombre explicito para todos ellos. (recursion)
+-Relaciones multiples entre los items: los punteros permiten que el dato sea puesto en varias estructuras sin necesidad de duplicarlo.
+-Acceso a bajo nivel: Los punteros estan cerca de la maquina
+
+
+#Valores#
+Direcciones de memoria
+Valor nulo (no asignado) direccion no valida
+
+#Operaciones# (l-valor r-valor r-valor de la variable apuntada
+-Asignacion de valor: generalmente asociado a la alocacion de la variable apuntada.
+-Referencias: a su valor (como direccion), operaciones entre punteros al valor de la variable apuntada: desreferenciacion implicita.
+
+
+Los punteros son un mecanismo mut potente para definir estructuras de datos recursivas.
+
+Por acceder a bajo nivel, pueden obscurecer o hacer inseguros a los programas.
+
+Se compara a los punteros con los go to:
+-Los go to amplian el rango de sentencias que pueden ejecutar
+-Los punteros amplian el rando de las celdas de memoria que pueden ser referenciadas por una variable y tambien amplian el tipo de los valores que puede contener un objeto.
+
+
+######################################
+########INSEGURIDAD PUNTEROS##########
+######################################
+Inseguridades: 
+-Violacion de tipos
+    Un puntero de tipo Integer puede apuntar a un valor de tipo entero pero tambien podria sobre un tipo flotante (aritmetica de punteros)
+ 
+-Referencias sueltas - referencias dangling
+    Si el objeto al que apunta no esta alocado se dice que el puntero es peligroso(dangling)
+    Una referencia suelta o dangling es un puntero que contiene una direccion de una variable dinamica que fue desalocada. Si luego se usa el puntero producira error.
+
+-Punteros no inicializados
+    Peligro de acceso descontrolado a posiciones de memoria
+    Verificacion dinamica de la inicializacion
+    Solucion: valor especial nulo.
+    -Nil en pascal
+    -void en C/c++
+    -null en ADA, python
+
+-Punteros y uniones discriminadas
+    En el caso de C, este es el mismo efecto que causa la aritmetica de punteros. Para resolver este problema asociado con los punteros Java elimina la nocion de puntero explicito completamente.
+
+-Alias
+    Varios identificadores (punteros) que apuntan a la misma direccion de memoria. Inseguridades del valor por tener varias entradas (modificacion desde otra unidad de programa).
+
+-Liberacion de memoria: objetos perdidos
+    Las variables punteros se alocan como cualquier otra variable en la pila de registros de activacion
+    -Los objetos (apuntados) que se alocan a traves de la primitiva new son alocados en la heap.
+    -La memoria disponible (heap) podria rapidamente agotarse a menos que de alguna forma se devuelva el almacenamiento alocado liberado.
+
+#Un objeto se dice accesible si alguna variable en la pila lo apunta directa o indirectamente
+
+#Un objeto es basura si no es accesible.
+
+
+######################################
+#######LIBERACION DE MEMORIA##########
+######################################
+
+-Formas automatica: reconocimiento de que porcion de la memoria es basura
+-Forma manual: se requiere o no intervencion del usuario
+
+#Liberacion de espacio 
+en la heap#
+
+Explicita
+-Dispose (Pascal)           
+-delete (C++)
+
+Implicita
+-Garbage Collector
+
+#Reconocimiento explicita#
+
+El reconocimiento de la basura recae en el programador, quien notifica al sistema cuando un objeto ya no se usa.
+
+No garantiza que no haya otro puntero que apunte a esta direccion definida como basura, este puntero se transforma en dangling. (puntero suelto)
+
+Este error es dificil de chequear y la mayoria de los lenguajes no lo implementan por que es costoso.
+
+
+#Reconocimiento implicita#
+
+El sistema durante la ejecucion tomara la decision de descubrir la basura por medio de un algoritmo de recoleccion de basura: garbage collector.
+
+Muy importante para los lenguajes de programacion que hacen uso intensivo de variables dinamicas. (python)
+
+#Garbage collector#
+El garbage collector se debe ejecutar durante el procesamiento de las aplicaciones
+
+Sistema interactivo que no debe perjudiar el rendimiento de la aplicacion.
+
+
+######################################
+#########TADS - ABSTRACTOS############
+######################################
+
+ABSTRACCION:
+
+La abstraccion es el mecanismo que tenemos las personas para manejar la complejidad.
+
+Abstraer es representar algo descubriendo sus caracteristicas esenciales y suprimiendo las que no lo son.
+
+El principio basico de la abstraccion es la informacion oculta.
+
+
+#TAD#
+
+TAD = representacion (datos) + operaciones (funciones y procedimientos)
+
+Los tipos de datos son abstracciones y el proceso de construir nuevos tipos se llama abstraccion de datos.
+
+Los nuevos tipos de datos definidos por el usuario se llaman tipos abstractos de datos.
+
+#Que debe satisfacer?#
+-Encapsulamiento: la representacion del tipo y las operaciones permitidas para los objetos del tipo se describen en una unica unidad sintactica. Refleja las abstracciones descubiertas en el diseño.
+
+-Ocultamiento de la informacion: la representacion de los objetos y la implementacion del tipo permanecen ocultos. Refleja los niveles de abstraccion. Modificabilidad
+
+
+#####TAD: CLASES#####
+
+En terminos practicos, una clase es un tipo definido por el usuario
+
+Una clase contiene la especificacion de los datos que describen un objeto junto con la descripcion de las acciones que un objeto conoce.
+        Atributos + Metodos
+
+Agrega un segundo nivel de abstraccion que consiste en agrupas las clases en jerarquia de clases. De forma que la clase hereda todas las propiedades de la supeclase.
+

@@ -1,0 +1,114 @@
+Sintaxis 
+Conjunto de reglas de los lenguajes
+BNF 
+N={<exp>, }
+T={0,1,2,3,4,5,6,7,8,9,a,b,c,…… }
+S={<exp>}
+P={<exp>::=
+}
+<term>|<term> + <exp>|<term> - <exp>
+<term>::=<elem>|<elem> *<term>|<elem>/ <term>
+<elem>::=<iden>|<núm>
+<iden>::=<letra>|<letra><sec>
+<sec>::=<letra>|<digito>|<digito><sec>|<letra><sec>
+<letra>::= a|b|c|…..
+<digito>::= 0|1|2|…..
+
+EBNF
+<núm>::= <digito>|<digito><núm>
+<term>,<elem>,<iden>,<letra>….
+<term>{(+|-)<term>}*
+<term>::=<elem>{(*|/)<elem>}*
+<núm>::=<digito>{<dígito>}*
+<iden>::=<letra>{(<letra>|<digito>)}*
+<elem>::=(<iden>|<núm>)
+<letra>::=(a|b|c..)
+<dígito>::=(0|1|2..)
+
+Semántica 
+Decribe el significado de los simbolos, palabras y frases de un lenguaje
+
+Hay 2 tipos:
+Estática: 
+-No esta relacionado con el significado del programa, está relacionado con las formas validas(sintaxis).
+-se llaman asi porque el análisis para el chequeo puede hacerse en compilación.
+-se describen usando las denominadas "gramáticas de atributos", inventadas por Knuth.
+-Generalmente las gramáticas sensibles al contexto resuelven los aspectos de la semántica estática.
+gramatica de atributos
+-A las construcciones del lenguaje se les asocia información a través de los llamados “atributos” asociados a los símbolos de la gramática correspondiente.
+-Los valores de los atributos se calculan mediante las llamadas “ecuaciones o reglas semánticas”
+-La evaluación de las reglas semánticas puede: 
+👍 Generar Código. 
+👍 Insertar información en la Tabla de Símbolos. 
+👍 Realizar el Chequeo Semántico. 
+👍 Dar mensajes de error, etc. 
+
+-Los atributos estan directamente relacionados con los simbolos gramaticales (terminales y no terminales)
+-La forma, general de expresar las gramaticas con atributos se escriben de forma tabular
+
+Regla gramatical_____Regla Semántica
+Regla 1_______ecuaciones de atributos
+Regla 2_______ecuaciones de atributos
+Regla 3_______ecuaciones de atributos
+...
+...
+...
+Regla n_______ecuaciones de atributos
+
+EJEMPLO:
+Regla gramatical_____Regla Semántica
+decl→ tipo lista-var___lista-var.at=tipo.at
+tipo→ int___________tipo.at = int
+tipo→ float_________tipo.at = float
+lista-var→ id                id.at = lista-
+var.at Añadetipo(id.entrada, lista-var.at)
+
+
+Dinámica
+-Describe el efecto de ejecutar las diferentes construcciones en el lenguaje de programación.
+-Su efecto se describe durante la ejecución del programa.
+-Sólo se pueden ejecutar si son correctos para la sintáxis y para la semántica estática 
+-No es fácil escribirla
+-No existen herramientas estándar (fáciles y claras) como en el caso de la sintáxis (diagramas sintácticos y BNF)
+-describe el prceso que una computadora sigue en un lenguaje especifico
+-no hay diagrama claro como en la estatica
+-Hay diferentes soluciones formales complejas:
+⭕Semántica Axiomática 
+⭕Semántica Denotacional
+-informal y sigue compleja
+⭕Semantica Operacional
+
+
+
+Semántica Axiomática 
+-Considera al programa como “una máquina de estados”
+-La notación empleada es el “cálculo de predicados”
+-Se desarrolló para probar la corrección de los programas
+-Los constructores de un lenguajes de programación se formalizan describiendo como su ejecución provoca un cambio de estado. (describe los estados a travez de los predicados)
+
+**FALTA**(a ver las diapos)(https://catedras.linti.unlp.edu.ar/mod/resource/view.php?id=29922)
+
+Semántica Denotacional
+-Se basa en la teoria de funciones recursivas
+-describe los estados, la denotacional lo describe a travez de funciones
+-se define una correspondencia entre los constructores sintacticos y sus significados
+
+Semantica Operacional (Informal)
+-El significado de un programa se describe mediante otro lenguaje de bajo nivel (implementado en una maquina abstracta)
+-los cambios que se producen en el estado de la maquina cuando ejecuta una sentencia del lenguaje definen su significado   
+-Es un método informal
+-Es el mas utilizado en los libros
+-PL/1 fue el primero
+    
+    Lenguaje Maquina
+-Lenguaje de bajo nivel utilizado por las computadoras
+-se utilizaba con 1's y 0's
+-complejidad+=20
+-uso del "lenguaje ensamblador" 
+(assembler <3) que utiliza codigo memotécnico(abreviatura con el proposito de la instrccion ej:MOV=mover) 
+    
+-el codigo estaba "pegado" a la maquina que lo ejecutaba, era dificil que otra maquina lo pudiese ejecutar
+
+-A partir de esto nacen los lenguajes de alto nivel
+
+    

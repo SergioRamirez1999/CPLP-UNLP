@@ -1,0 +1,110 @@
+Definicion:
+    Describe el significado de los simbolos, palabras y frases de un lenguaje ya sea lenguaje natural o lenguaje informatico.
+
+Tipos:
+    Estatica
+    Dinamica
+
+
+SEMANTICA ESTATICA
+No esta relacionado con el significado del programa, esta relacionado con las formas validas(con la sintaxis)
+El analisis para el chequeo puede hacerse en compilacion.
+Generalmente las gramaticas sensibles al contexto resuelven los aspectos de la semantica estatica
+
+SEMANTICA DINAMICA
+Es la que describe el efecto de ejecutar las diferentes construcciones en el lenguaje de programacion.
+Su efecto se describe durante la ejecucion del programa.
+Los programas solo se pueden ejecutar si son correctos para la sintaxis y para la semantica estatica.
+
+######### HACER EJEMPLO DE SUMAS DE CHAR E INT. FALLA EN C, EN JAVA LO RESUELVE ########
+######### HACER EJEMPLO DE INCREMENTO ++ DE CHAR ########
+
+
+###########################################################################################33
+
+Diferencias entre los lenguajes de
+programación
+@ El número de entidades
+@ El número de atributos que se les pueden
+ligar
+@ El momento en que se hacen las
+ligaduras (binding time).
+@ La estabilidad de la ligadura: una vez
+establecida se puede modificar?
+
+#######JAVA Y C LIGADURA ESTATICA###########
+#######ESTABILIDAD ESTATICA##########
+
+
+#####VARIABLES : ATRIBUTOS#####
+@ Nombre: string de caracteres que se usa para
+referenciar a la variable. (identificador)
+@ Alcance: es el rango de instrucciones en el que se
+conoce el nombre
+@ Tipo: valores y operaciones
+@ L-value: es el lugar de memoria asociado con la
+variable (tiempo de vida)
+@ R-value: es el valor codificado almacenado en la
+ubicación de la variable
+
+@ Nombre: Longitud maxima, caracteres permitidos, case sensitive, palabras reservadas, palabras clave.
+@ Alcane: rango de visibilidad, scope, utilizacion, alcance estatico/dinamico
+    Alcance estatico: define el alcance en terminos de la estructura lexica del programa.
+    puede ligarse estaticamente a una declaracion examinando el texto del programa, sin necesidad
+    de ejecutarlo.
+    Alcance dinamico: define el alcance en terminos del contexto de invocacion. 
+    Se resuelve en  tiempo de ejecucion.
+
+@ Tipo: conjunto de valores, conjunto de las operaciones.
+    Antes de que una variable pueda ser referenciada debe ligarsele un tipo.
+    Protege a las variables de operaciones no permitidas
+    @Chequeo de tipos: verifica el uso correcto de las variables.
+    Predefinidos
+        -Tipos base
+    Definidos por el usuario
+        -Constructores
+    TADs
+
+    """CONVERSION DE TIPOS IMPLICITA EXPLICITA"""
+    """Binding de la variable con su tipo, 
+    momento estatico explicito/inferido/implicito
+    momento dinamico"
+@ L-Value
+    Area de memoria ligada a la variable(direccion de memoria)
+    Tiempo de vida (lifetime) o extension
+        Periodo de tiempo que existe la ligadura
+    Alocacion: momento que se reserve la memoria
+    Momentos de alocacion
+        @Estatica: sensible a la historia (tiene destinado un espacio de memoria(direccion) un instante antes de cargar el programa)
+        @Dinamica: Direccion al cargar el programa.
+            -Automatica: cuando aparece la declaracion (se lee la linea)
+            -Explicita: espacio a traves de constructor (variables apuntadas por punteros)
+        @Persistente: su tiempo de vida no depende de la ejecucion
+            Existe en el ambiente: archivos - bases de datos.
+
+    variable static hace referencia a su tiempo de vida, no tiene que ver con el alcance.
+    una variable static tiene destinado un espacio de mem antes de la ejecucion del programa, y
+    vive hasta la finalizacion del programa. Tiene alcance desde la misma funcion o clase.
+@ R-Value
+    Valor almacenado en el l-valor de la variable
+    Se interpreta de acuerdo al tipo de la variable
+    @Momentos
+        Dinamico: por naturaleza (valores cambiantes, sentido de variable)
+        Constante: el valor queda fijado desde su inicializacion.
+    """ R VALOR POR DEFECTO SEGUN TIPO 'REGLAS DE INICIALIZACION' """
+    """ FORZAR INICIALIZACION EN SU DECLARACION, CONSTANTES JAVA """
+    """ R VALOR PUNTERO A -> &B """
+    """ aliases, mas de un nombre mismo objeto referenciado """
+    """ sobrecarga, operador + """
+
+
+####VARIABLES : CLASIFICACION####
+@ Local: Son todas la referencias que se han creado dentro del programa o subprograma. 
+@ No Local: Son todas las referencias que se utilizan dentro del subprograma pero que no han sido creadas en él.
+@ Global: Son todas las referencias creadas en el programa principal.
+
+
+####ESPACIO DE NOMBRES#####
+Zona separada donde se pueden declarar y definir objetos, funciones y en general, cualquier identificador de tipo, clase, estructura, etc.; al que se asigna un nombre o identificador propio.
+
+Ayudan a evitar problemas con identificadores con el mismo nombre en grandes proyectos o cuando se utilizan bibliotecas externas.

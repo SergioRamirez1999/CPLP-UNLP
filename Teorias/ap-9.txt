@@ -1,0 +1,182 @@
+###############################
+####ESTRUCTURAS DE CONTROL#####
+###############################
+
+Definicion
+
+
+##Distincion entre sentencia y expresion##
+
+En cualquier lenguaje convencional, existe diferencia entre sentencia de asignacion y expresion
+
+En otros lenguajes tales como C definen la sentencia de asignacion, como una expresion con efectos laterales.
+
+Las sentencias de asignacion devuelven valores.
+
+
+@A nivel de Unidad
+
+
+@A nivel de sentencia
+
+    -Secuencia
+        Indica la ejecucion de una sentencia a continuacion de otra.
+        Se pueden agrupar varias sentencias en una, llamada Sentencia compuesta.
+        Delimitadas por ejemplo por begin-end {}
+
+        Asignacion
+        Sentencia que produce cambios en los datos de la memoria.
+        Asigna al l-valor de un objeto de dato el r-valor de una expresion.
+        Sintaxis a:=b   a = b   move b to a
+
+    -Seleccion
+        Esta estructura de control permite que el programador pueda expresar una eleccion entre un cierto numero posible de sentencias alternativas.
+
+        Evolucion:
+            If logico de fortran
+
+            if then else (lenguaje Algol) sin cierre
+
+            Luego se agrega delimitadores sin ambiguedad con cierres.
+
+        Python sin ambiguedad, if elif else con : obligatorio
+
+        If in line (valor if condicion else valor)
+
+
+        ###Circuito corto y circuito largo###
+
+        Python circuito corto
+
+
+        ###Seleccion multiple###
+
+        SENTENCIA SELECT INCORPORA LA SENTENCIA DE SELECCION ENTRE DOS O MAS OPCIONES. (SWITCH)
+
+        Pascal Case opcion Of
+           Inseguro por else opcional, que pasa si hay seleccion de un valor no especificado?
+
+        ADA
+            Más seguro, expresión others
+            
+            ADA COMPARADO CON PASCAL
+            En el case de ADA la sentencia others es obligatoria, haciendola mas segura que la sentencia case de Pascal, dado que en esta el else es opcional. Otra diferencia es que en ADA las expresiones pueden ser solo de tipo entero o numerativas.
+
+            COMPARACION CON C
+            La estructura equivalente en C se llama Switch, y su diferencia es que cuando la opcion coincide con una etiqueta, ejecuta el bloque correspondiente y luego sigue con las siguientes etiquetas. Puede usarse la sentencia break para cortar con la ejecucion
+
+        C
+            Constructor switch.
+            Cada rama es etiquetada por uno o mas valores constantes.
+            Cuando la opcion coincide con una etiqueta del switch se ejecutan las sentencias asociadas y se continua con las sentencias siguientes.
+            Se agrega la sentencia Break para saltar las sigueintes ramas.
+
+        Ruby
+            variable = case variable_comprobacion
+                        when 'elfo' then 'Gimli'
+                        ......etcetera..........
+            Sentencia case
+            Si no entra en ninguna opcion, sigue la ejecucion y la variablo no tendra ningun valor asignado.
+
+    -Iteracion
+
+        Se utilizan para representar aquellas acciones que se repiten un cierto numero de veces,
+        
+        Evolucion:
+            Sentencia do de fortran
+            Do label var-de-control=valor1, valor2
+                ............
+            la variable de control podia tomar solo valores enteros.
+
+            Pascal, ADA, C, C++
+            La variable de control puede tomar cualquier valor ordinal, no solo enteros.
+            Pascal estandar no permite que se toquen ni los valores limite inferior y superior, ni el valor de la variable de control.
+            La variable de control puede ser de cualquier valor ordinal.
+            El valor de la variable fuera del bloque se asume indefinida.
+
+            C c++ se compone de tres partes: una inicializacion y dos expresiones
+            
+
+            Python, estructura que permite iterar sobre una secuencia. Las secuencias pueden ser: una lista, una tupla, etc.
+            
+            lista = ['a', 'b', etc]
+            for variable in lista:            
+                print variable.
+
+            Existe el range() similar a iteradores de c y java
+
+         ###While###
+
+        Estructura que permite repetir un proceso mientras se cumpla una condicion.
+        La condicion se evalua antes de que se entre al proceso
+        Pascal (while condicion do sentencia;)
+        C C++ (while (condicion) sentencia;)
+
+         ###Until###
+         Estructura que permite repetir un proceso mientras se cumpla una condicion:
+         La condicion se evalua al final del proceso, por lo que por lo menos una vez el proceso se realiza.
+
+
+
+###############################
+####Excepciones#####
+###############################
+
+Condicion inesperada o inusual, que surge durante la ejecucion del programa y no puede ser manejada en el contexto local.
+
+Preguntas a un lenguaje:
+-Como se maneja una excepcion y cual es su ambito?
+-Como se alcanza una exception?
+-Como especificar las unidades que se han de ejecutar cuando se alcanza las exception?
+-A donde se cede el control cuando se termina de atender las exceptions?
+-Como se propagan las exceptionS?
+-Hay exceptions predefinidas?
+
+
+##MODELOS DE EJECUCION##
+
+@Reasuncion (MANEJA Y CONTINUA)
+    -PL/1
+@Terminacion (TERMINA Y MANEJA)
+    -ada
+    -c++
+    -java
+    -python
+    -php
+
+En PL/1
+    Primer lenguaje que incorpora manejo de excepciones
+    Tiene excepciones predefinidas (built-in exceptions).    
+    Los manejadores se ligan dinamicamente con las excepciones. Una excepcion siempre estara ligada con el ultimo manejador definido.
+    El alcance de un manejador termina cuando finaliza la ejecucion de la
+unidad donde fue declarado, ya que se alocan en la pila. 
+    En el caso de este lenguaje, luego de levantar y atender una excepcion la ejecucion del programa continua
+    Su paradigma es imperativo, el cual se basa en la ejecucion sucesiones de sentencias y secuencias de comandos que describen el paso a paso del programa escrito
+    Excepciones llamadas CONDITIONS
+    Los manejadores se declaran con la sentencia ON:
+    
+
+    
+##CRITERIO DE TERMINACION###
+
+CRITERIO EN ADA
+    Cada vez que se produce una excp, se termina el bloque donde se levanto y ejecuta el manejador asociado.
+    Las exc se definen en la zona de definicion de las variables y tienen el mismo alcance.
+    Se alcanzan explicitamente con la palabra clave raise.
+    Los manejadores pueden encontrarse en el final de cuatro diferentes uniodades de programa: bloque, procedimiento, paquete o tarea.
+
+    ##propagacion##
+    Se termina la unidad.
+    Si el manejador se encuentra en ese ambito, se ejecuta.
+    Si no se encuentra, entonces se propaga dinamicamente. Esto significa que se vuelve a levantar en otro ambito.
+    Siempre tener en cuenta el alcance, puede convertirse en anonima.
+
+
+
+###EXCEPCIONES CLU####
+Propagacion al producirse una excepcion:
+    -Se termina el procedimiento donde se levanto la excepcion y devuelve el control al llamante inmediato donde se debe encontrar el manejador
+    -Si el manejador se encuentra en ese ambito, se ejecuta y luego se pasa el control a la sentencia siguiente ala que esta ligado dicho manejador.
+    -Si el manejador no se encuentra en ese lugar la excepcion se propaga estaticamente en las sentencias asociadas. Esto significa que el proceso se repite para las sentencias incluidas estaticamente.
+    -En caso de no encontrar ningun manejador en el procedimiento que hizo la llamada se levanta una excepcion failure y devuelve el control, terminando todo el programa.
+    

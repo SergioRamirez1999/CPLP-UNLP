@@ -1,0 +1,157 @@
+###################################
+########SISTEMA DE TIPOS###########
+###################################
+
+Conjunto de reglas usadas por un lenguaje para estructurar y organizar sus tipos.
+El objetivo de un sistema de tipos es escribir programas seguros.
+
+Conocer el sistema de tipos de unb lenguaje nos permite conocer de una mejor forma los aspectos semanticos del lenguaje.
+
+
+@Provee mecanismos de expresion:
+    - Expresar tipos intrinsecos o definir tipos nuevos.
+    - Asociar los tipos definidos con construcciones del lenguaje.
+
+@Define reglas de resolucion:
+    - Equivalencia de tipos - dos valores tienen el mismo tipo?
+    - Compatibilidad de tipos - puedo usar el tipo en este contexto?
+    - Inferencia de tipos - cual tipo se deduce del contexto?
+
+@Mientras mas flexible el lenguaje, mas complejo el sistema
+
+
+###################################
+###TIPADO FUERTE - TIPADO DEBIL####
+###################################
+
+Se dice que el sistema de tipos es fuerte cuando especifica restricciones sobre como las operaciones que involucran valores de diferentes tipos pueden operarse. Lo contrario estrablece un sistema debil de tipos.
+
+
+###################################
+#SISTEMA DE TIPOS - ESPECIFICACION#
+###################################
+
+@ Tipo y tiempo de chequeo
+@ Reglas de equivalencia y conversion
+@ Reglas de inferencia de tipo
+@ Nivel de polimorfismo del lenguaje
+
+
+###################################
+#####Tipo y tiempo de chequeo######
+###################################
+  
+Tipos de ligadura
+
+    - Tipado estatico: ligaduras en compilacion. Para esto puede exigir:
+       @ Se puedan utilizar tipos de datos predefinidos.
+       @ Todas las variables se declaran con un tipo asociado.
+       @ Todas las operaciones se especifican indicando los tipos de los operandos requeridos y el tipo del resultado.
+
+    - Tipado dinamico: ligaduras en ejecucion, provoca mas comprobaciones en tiempo de ejecucion ( no es seguro??? )
+
+
+###############################
+##Lenguaje Fuertemente Tipado##
+###############################
+
+!!!!DEFINICION ACEPTADA EN LA CATEDRA!!!
+@ Un lenguaje se dice fuertemente tipado si el sistema de tipos impone restricciones que aseguran que no se produciran errores de tipo en ejecucion.
+En esta concepcion, la intencion es evitar los errores de aplicacion y son tolerados los errores del lenguaje, detectados tan pronto como sea posible.
+
+OTRAS DEFINICIONES
+@ Si el lenguaje es fuertemente tipado el compilador puede garantizar la ausencia de errores de tipo en los programas
+
+@ Un lenguaje se dice fuertemente tipado si el sistema de tipos impone restricciones que aseguran que no se produciran errores de tipo en ejecucion.
+
+@ Un lenguaje se dice fuertemente tipado si todos los errores de tipo se detectan.
+
+
+###############################################
+######Reglas de equivalencia y conversion######
+###############################################
+
+- Tipo compatible: reglas semanticas que determiann si eel tipo de un objeto es valido en un contexto particular.
+
+- Un lenguaje debe definir en que contexto el tipo Q es compatible con el tipo T.
+
+- Si el sitema de tipos define la compatibilidad.
+
+
+Compatibilidad por nombre o por estructura.
+
+-Equivalencia por nombre: dos variables son del mismo tipo si y solo si estan declaradas juntas o si estan declaradas con el mismo nombre de tipo.
+
+-Equivalencia por estructura: dos variables son del mismo tipo si los componentes de su tipo son iguales.
+
+
+##Cuando es compatible???##
+
+Un tipo es compatible con otro si
+    - Es equivalente
+    - Se puede convertir
+
+@ coerción: significa convertir un valor de un tipo a otro. Reglas del lenguaje de acuerdo al tipo de los operandos y a la jerarquia.
+
+
+###REGLAS DE CONVERSION###
+
+@Widening (ensanchar): cada valor del dominio tiene su correspondiente valor en el rango. (Entero a Real). Pascal solo widening de entero a real.
+
+@Narrowing (estrechar): cada valor del dominio puede no tener su correspondiente valor en el rango. En este caso algunos lenguajes producen un mensaje avisando la perdida de informacion. (Real a Entero). En C depende del contexto y utiliza un sistema de coersion simple.
+
+@Clausula de casting: conversiones explicitas, se fuerza a que se convierta
+
+
+########################################################
+######Reglas de inferencia y nivel de polimorfismo######
+########################################################
+
+La inferencia de tipos permite que el tipo de una entidad declarada se "infiera" en lugar de ser declarado. La inferencia puede realizarse de acuerdo al tipo de:
+
+    -Un operador predefinido.
+    -Un operando
+    -Un argumento
+    -El tipo del resultado.
+
+######################################
+#####MONO-MORFICO / POLIMORFICO ######
+######################################
+
+-Un lenguaje se dice mono-morfico si cada entidad se liga a un unico tipo (estaticos). En un lenguaje de programacion mono-morfico la funcion disjuntos debera implementarse para cada tipo particular de conjunto.
+
+--Un lenguaje se dice polimorfico si las entidades pueden estar ligadas a mas de un tipo
+
+-Las variables polimorficas pueden tomar valores de diferentes tipos.
+
+-Las operaciones polimorficas son funciones que aceptan operandos de varios tipos
+
+-Los tipos polimorficos tienen operaciones polimorficas.
+
+
+
+##################################
+POLIMORFISMO AD HOC -> SOBRECARGA
+                    |-> COERCION
+##################################
+
+-El polimorfismo ad-hoc permite que una funcion se aplique a distintos tipos con un comportamientos sustancialmente diferente en cada caso.
+
+-El termino sobrecargar se utiliza para referisrse a conjuntos de abstracciones diferentes que estan ligadas al mismo simbolo (ejemplo operador +, concatenacion y suma)
+
+-La coercion permite que un operador que espera un operado de  un determinado tipo T puede aplicarse de manera segura sobre un operando de un tipo diferente al esperado
+
+
+
+El polimorfismo universal permite que una unica operacion se aplique uniformemente sobre un conjunto de tipos relacionados.
+
+Si la uniformidad de la estructua de tipos esta dada a traves de parametros, hablamos de polimorfismo parametrico.
+
+    Un tipo parametrizado es un tipo que tiene otros tipos como parametros. Ejemplo Tipo Lista con Tipo T como parametro.
+    lista(T)=T*
+
+El polimorfismo por inclusion es otra forma de polimorfismo universal que permite modelar subtipos y herencia.
+
+- Si un tipo se defione como un conjunto de valores y un conjunto de operaciones, un subtipo T' de un tipo T puede definirse como un subconjunto de los valores de T y el mismo conjunto de operaciones.
+
+-El mecanismo de herencia permite definir una nueva clase derivada a partir de una clase base ya existente. Podria agregar atributos y comportamiento.

@@ -1,0 +1,150 @@
+############################
+#########PARADIGMAS#########
+############################
+
+Un paradigma de programacion es un estilo de desarrollo de programas, un modelo para resolver problemas computacionales. Los lenguajes de programacion, necesariamente, se encuadran en uno o varios paradigmas a la vez, a partir del tipo de ordenes que permiten implementar, tiene una relacion directa con su sintaxis.
+
+-Imperativo: Sentencias + secuencias de comandos.
+
+-Declarativo: Los programas describen los resultados esperados sin listar explicitamente los pasos a llevar a cabo para alcanzarlos. (SQL)
+
+-Logico: Aserciones lógicas: hechos + reglas, es declarativo
+
+-Funcional: Los programas se componen de funciones.
+
+-Orientado a objetos: Métodos + mensajes.
+
+
+##########################
+##OTRAS CLASIFICACIONES###
+##########################
+
+-Dirigidos por eventos: El flujo del programa esta determinado por sucesos externos (por ejemplo, una accion del usuario).
+
+-Orientado a aspectos: Apunta a dividir el programa en modulos independientes, cada uno con un comportamiento y responsabilidad bien definido. Los lenguajes como Java o PHP utilizan el paradigma mediante una librería.
+
+
+
+##########################
+###PROGRAMACION LOGICA####
+##########################
+
+Es un tipo de paradigmas de programacion dentro del paradigma de programacion declarativa.
+
+Es un paradigma en el cual los programas son una serie de aserciones logicas.
+
+El conocimiento se representa a traves de reglas y hechos.
+
+Los objetos son representados por terminos, los cuales contienen constantes y variables.
+
+PROLOG es el lenguaje logico mas utilizado.
+
+Termino ----> Constantes
+        |---> Variables
+
+### Variables ###
+
+Se refieren a elementos indeterminados que pueden sustituirse por cualquier otro.
+-"humano(X)", la X puede ser sustituida por constantes como: juan, pepe, etc.
+-Los nombres de las variables comienzan con mayusculas y pueden incluir numeros.
+
+### Variables ###
+
+A diferencia de las variables son elementos
+
+Las constantes son string de letras en minusculas, o string de digitos
+
+
+### Termino Compuesto ###
+
+Consiste en un "functor" seguido de un numero fijo de argumentos encerrados entre parentesis, los cuales son a su vez terminos.
+Se denomina "aridad" al numero de argumentos
+
+padre ---> constante
+Longitos --> Variable
+tamaño(4,5) --> Estructura.
+
+######################################
+###PROGRAMACION LOGICA - ELEMENTOS####
+######################################
+
+Listas: 
+    La constante [] representa una lista vacia.
+    El functor "." construye una lista de un elemento y una lista. Ejemplo: (alpha,[])
+
+Clausulas de HORN
+
+Un programa escrito en un lenguaje logico es una secuencia de "clausulas"
+Las clausulas pueden ser: un "Hecho" o una "Regla".
+
+Hecho: 
+    Expresan relaciones entre objetos
+    Expresan verdades
+    Son expresiones del tipo p(t1,t2,...tn)
+
+Regla:
+    Tiene la forma: conclusion :- condicion.
+Donde:
+    :- indica "Si"
+    conclusion es un simple predicado y condicion es una conjuncion de predicados. Representan un AND logico.
+
+
+
+######################################
+##PROGRAMACION ORIENTADA A OBJETOS###
+######################################
+
+Elementos: objetos mensajes metodos clases.
+
+Objetos: entidades que poseen estado interno y comportamiento.
+
+
+Mensaje: Hace peticion de un objetos a otro. Todo el procesamiento en este modelo es activado por mensajes entre objetos.
+
+Metodos: es un programa que esta asociado a un objeto determinado y cuya ejecucion solo puede desencadenarse a traves de un mensaje recibido por este o por sus descendientes.
+
+Clases: tipo definido por el usaruio que determina las estructuras de datos y las operaciones asociadas con ese tipo.
+
+Instancia de clase: cada vez que se construye un objeto se esta creando una instancia de esa clase.
+
+Herencia:
+
+Polimorfismo:
+
+etc.
+
+
+
+######################################
+##LENGUAJES BASADOS EN SCRIPT###
+######################################
+
+COORDINACION DE PROGRAMAS
+
+LOS PRIMEROS LBS ERAN UN CONJUNTO DE COMANDOS QUE ERAN INTERPRETADOS COMO LLAMADAS AL SISTEMA COMO MANEJO O FILTRADO DE ARCHIVOS.
+
+LOS LENGUAJES DE SCRIPT TIENDEN A MEJORAR FLEXIBILIDAD, DESARROLLO RAPIDO Y CHEQUEO DINAMICO. SU SITEMA DE TIPOS SE CONSTRUYE SOBRE CONCEPTOS DE MAS ALTO NIVEL COMO TABLAS, PATRONES, LISTASD Y ARCHIVOS.
+
+
+OBJETIVOS:
+    -COMBINAR PROGRAMAS
+    -DESARROLLO RAPIDO
+    -EDITORES LIVIANOS
+    -INTERPRETADOS
+  
+GLUE-LANGUAGE ----> PYTHON - PERL
+DESARROLLADOS COMO ACOPLE/EXTENSION A OTROS SISTEMAS
+
+
+CARACTERISTICAS COMUNES:
+    -ALTO NIVEL DE PROCESAMIENTO DE STRING Y GENERACION DE REPORTES LOGS EXP REGULARES
+    -ALTO NIVEL PARA SOPORTE DE INTERFACES DE USUARIO
+    -TIPADO DINAMICO
+
+
+LOS LBS SON RICOS EN:
+    -CONJUNTOS
+    -DICIONARIOS
+    -LISTAS
+    -TUPLAS, ETC
+

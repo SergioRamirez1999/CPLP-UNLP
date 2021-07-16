@@ -1,0 +1,95 @@
+C3: DATOS NECESARIOS - ###REGISTRO DE ACTIVACION###
+PARA MANEJAR ALOCACION DINAMICA NECESITAMOS CIERTOS ELEMENTOS.
+
+###REGISTRO DE ACTIVACION###
+----------------
+PUNTO DE RETORNO
+----------------
+DATOS LOCALES
+----------------
+VALOR DE RETORNO
+----------------
+LINK DINAMICO
+----------------
+
+-PUNTO DE RETORNO: DIRECCION DE RETORNO UNA VEZ FINALIZADA LA INVOCACION DE LA RUTINA.
+-DATOS LOCALES: DIRECCIONES DE LOS DATOS LOCALES A LA RUTINA.
+-VALOR DE RETORNO: POSIBLE VALOR DE RETORNO DE UNA FUNCIÓN AL FINALIZAR SU INVOCACIÓN.
+-LINK DINAMICO: PUNTERO A LA DIRECCION BASE DEL REGISTRO DE ACTIVACION DE LA FUNCION LLAMADORA,
+QUE DEBE TOMAR EL CONTROL UNA VEZ QUE LA INVOCACION DE LA FUNCION FINALIZE.
+
+QUIEN MANTIENE APUNTADO EL REGISTRO DE ACTIVACION QUE ESTA ACTIVO?
+QUIEN MANTIENE APUNTADO EL REGISTRO DE LA PROXIMA DIRECCION LIBRE EN LA PILA?
+
+ADEMAS SE NECESITA: 
+-CURRENT: DIRECCION BASE DEL REGISTRO DE ACTIVACION DE LA UNIDAD QUE SE ESTA EJECUTANDO ACTUALMENTE.
+-FREE: PROXIMA DIRECCION LIBRE EN LA PILA.
+
+###DATO DE COLOR###
+SI UN LENGUAJE UTILIZA ALCANCE DINAMICO (BUSCA EL CONTEXTO DE LA FUNCION INVOCADORA PARA ENCONTRAR EL VALOR QUE REQUIERE)
+EL LINK DINAMICO SE UTILIZA PARA OBTENER LA DIRECCION BASE DE LA FUNCION INVOCADORA, Y ASÍ SU CONTEXTO.
+A ESTA "BUSQUEDA" SE LA CONOCE COMO CADENA DINAMICA.
+
+--- poner explicacion de como se actualizan current y frre en la  invocacion de una rutina ---
+MIN 62
+
+
+
+ALOCACION
+
+Estatico: Incluir las necesidades dentro del registro de activacion de la unidad a la que pertenece.
+##simple y eficiente en tiempo##
+
+Dinamico: alocar el espacio dinamicamente cuando se ejecutan las sentencias.
+##eficiente en espacio##
+
+C4: ACCESO AL AMBIENTE NO LOCAL
+
+LINK ESTATICO: apunta al registro de activacion de la unidad que estaticamente la contiene.
+
+##La secuencia de links estaticos se denomina cadena estatica.##
+
+###REGISTRO DE ACTIVACION###
+----------------
+PUNTO DE RETORNO
+----------------
+DATOS LOCALES
+----------------
+VALOR DE RETORNO
+----------------
+LINK DINAMICO
+----------------
+LINK ESTATICO
+----------------
+
+
+C5: DATOS MAS DINAMICOS
+
+Registro de activacion cuyo tamaño se conoce cuando se activa la unidad.
+
+C5 PRIMA:##DATOS SEMIDINAMICOS##
+
+°ARREGLOS DINAMICOS: VECTOR(0..N) --- N ES DE TIPO INTEGER, PERO QUE VALOR ES?
+
+~En compilacion
+    Se reserva lugar en el registro de activacion para los descriptores de los arreglos dinamicos.
+
+~En ejecucion:
+    el registro de activacion se aloca en varios pasos:
+    1. Se aloca el almacenamiento para los datos de tamaño conocido estáticamente y para los descriptores de los arreglos dinamicos.
+    2. Con la declaracion se calculan las dimensiones en los descriptores y se extiende el registro de activacion para incluir el espacio para la variable dinamica.
+    3. Se fija el puntero del decriptor con la direccion del area alocada
+
+C5 PRIMA X 2:##DATOS DINAMICOS##
+
+Se alocan explicitamente durante la ejecucion mediante instrucciones de alocacion.
+
+p pointer to integer.
+p -> es variable automatica que se guarda en el registro de activacion, la cual su valor es una direccion de una variable anonima dinamica, de tipo entero, almacenada en la heap
+
+VER DEFINICION DE
+variables estaticas: se alocan cuando se carga el programa, se desalocan cuando termina.
+variables automaticas/semiestaticas: se alocan y desalocan cuando se carga el registro de activacion en una invocación la rutina, y se descargan al finalizar.
+variables semidinamicas: se alocan cuando se carga el registro de activacion, se conoce el tamaño real cuando se carga el registro de activación.
+variables dinamicas: Son apuntadas por punteros, se almacenan en la heap. Son anónimas y son accedidas por punteros.
+

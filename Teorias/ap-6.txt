@@ -1,0 +1,165 @@
+########PARAMETROS#########
+
+###Pasaje de parametros####
+
+
+##DEFINICION##
+
+    @El pasaje de parametros es el mas flexible y permite la transferencia de diferentes datos en cada llamada.
+    @Proporciona ventajas en legibilidad y modificabilidad.
+    @Nos permiten compartir los datos en forma abstracta ya que indican con precision que es exactamente lo que se comparte.
+
+##PROPIEDADES##
+
+    -Argumento: es un valor u otra entidad que se pasa a un procedimiento o funcion (parametro real)
+    -Parametro: es una variable utilizada para recibir valores de entrada en una rutina, subrutina, etc.(parametro formal)
+
+### LOS PARAMETROS FORMALES SON VARIABLES LOCALES ###
+
+##Parametros reales y ligadura con formales###
+    -Evaluacion:
+    En general en el momento de la invocacion primero se evalua los parametros reales, y luego se hace la ligadura antes de transferir el control de la unidad llamada.
+    -Ligadura:
+    @Posicional: Se corresponden con la posicion que ocupan en la lista.
+    @Palabra clave o nombre: Se corresponden con el nombre por lo tanto pueden estar colocados indistintamente en la lista.
+
+
+##Clases de parametros: datos y subprogramas##
+
+    #Parametros tipo DATOS
+    Hay diferentes formas de transmitir los parametros hacia y desde el programa llamado.
+    Desde el punto de vista semantico los parametros formales pueden ser:
+    -Mode IN: El parametro formal recibe el dato desde el parametro real.
+    -Mode OUT: El parametro formal envia el dato al parametro real.
+    -Mode IN/OUT: El parametro formal recibe el dato del parametro real y el parametro formal le envia el dato al parametro real
+
+################################################
+####### PASAJE DE PARAMETROS TIPO DATOS ########
+################################################
+
+##MODE IN##
+
+Mode IN ----> Por valor
+        |---> Por valor constante.
+
+Por valor:
+    -El valor del parametro real se usa para inicializar el correspondiente parametro formal al invocar la unidad.
+    -Se transfiere el dato real.
+    -En este caso el parametro formal actua como una variable local de la unidad llamada.
+    
+    Desventaja: Consume el tiempo para hacer la copia y el almacenamiento para duplicar el dato.
+    Ventaja: protege los datos de la unidad llamadora, el parametro real no se modifica.
+
+
+Por valor constante:
+    -No indica si se realiza o no la copia, lo que establece es que la implementacion debe verificar que el parametro real no sea modificado.
+    Ejemplo: parametros IN de ADA.
+
+    Desventaja: requiere realizar mas trabajo para implementar los controles.
+    Ventaja: protege los datos de la unidad llamadora, el parametro real no se modifica.
+
+
+##MODE OUT##
+
+Mode IN ----> Por Resultado
+        |---> Resultado de funciones.
+
+Por resultado:
+    -El valor del parametro formal se copia al parametro real al terminar de ejecutarse la unidad llamada.
+    -El parametro formal es una variable local, sin valor inicial.
+
+    Desventaja:
+    -Consume tiempo y espacio
+    -Si se repiten los parametro reales, los resultados pueden ser diferentes. (llamo con A(x,x) y recibo como A(y,j)
+    -Se debe tener en cuenta el momento en que se evalua el parametro real.
+
+    Ventaja: protege los datos de la unidad llamadora, el parametro real no se modifica en la ejecucion de la unidad llamada.
+
+
+Por resultado de funciones:
+    -El resultado de una funcion puede devolverse con el return como en Python, c, etc., o como en Pascal en el nombre de la función (ultimo valor asignado) que se considera como una variable local.
+    -Dicho resultado reemplaza la invocacion en la expresion que contiene el llamado.
+
+
+##MODE IN/OUT##
+
+Mode IN ----> Por Valor/Resultado
+        |---> Por referencia.
+        |---> Por nombre.
+
+Por valor/resultado: 
+    -Copia a la entrada y a la salida de la activacion de la unidad llamadora.
+    -El parametro formal es una variable local que recibe una copia a la entrada del contenido del parametro real y a la salida el parametro real recibe una copia de lo que tiene el parametro formal.
+    -Cada referencia al parametro formal es una referencia local.
+
+    
+    Tiene las desventajas y las ventajas de ambos.
+
+
+Por referencia:
+    -Se transfiere la direccion del parametro real al parametro formal.
+    -El parametro formal sera una variable local a la unidad llamadora que contiene la direccion en el ambiente no local.
+    -Cada referencia al parametro formal sera a un ambiente no local. Esto significa que cualquier cambio que se realice en el parametro formal dentro del cuerpo del subprograma quedara registrado en el parametro real.
+    -El parametro real es compartido por la unidad llamada.
+
+    Desventajas:
+    -El acceso al dato es mas lento por la indireccion
+    -Se pueden modificar el parametro real inadvertidamente.
+    -Se pueden generar alias y estos afectan la legibilidad y por tanto la confiabilidad, hacen muy dificil la verificacion de programas.
+    
+    Ventaja:
+    -Eficiente en tiempo y espacio. No se realizan copias del dato.
+
+
+Por nombre:
+    -El parametro formal es sustituido textualmente por el parametro real.
+    Es decir se establece la ligadura entre parametro formal y parametro real en el momento de la invocacion pero la ligadura de valor se difiere hasta el momento en que se lo utiliza.
+    -El objetivo es otorgar mayor flexibilidad a traves de esta evolucion de valor diferida.
+    -Si el dato a compartir es:
+    #Un unico valor se comporta exactamente igual que el pasaje por referencia
+    #Si es una constante es equivalente a por valor.
+    #Si es un elemento de un arreglo puede cambiar el suscripto entre las distintas referencias.
+    #Si es una expresion de evalua cada vez.
+
+
+    -Para implementarlo se utilizan los thunks que son procedimientos sin nombre. Cada aparicion del parametro formal se reemplaza en el cuerpo de la unidad llamado por una invocacion a un thunks que en el momento de la ejecucion activara al procedimiento que evaluara el parametro real en el ambiente apropiado.
+    -Es un metodo mas flexible pero mas lento, ya que debe evaluarse cada vez que lo uso.
+    -Es dificil de implementar y genera soluciones confusas para el lector y el escritor.
+
+
+
+################################################
+##### PASAJE DE PARAMETROS TIPO FUNCIONES ######
+################################################
+
+Pasaje de parametros en funciones
+    -Las funciones no deberian producir efectos laterales. Es decir no deben alterar el valor de ningun dato (local ni no local) solo producir un resultado.
+    -Los parametros formales deberian ser siempre modo IN. (EJ. ADA)
+    -Ortogonalidad. Los resultados deberian poder ser de cualquier tipo. (Ej: Adata, ortogonal; Pascal solo permite escalares)
+
+
+################################################
+### PASAJE DE PARAMETROS TIPO SUBPROGRAMAS #####
+################################################
+
+Subprogramas como parametro:
+    -En algunas situaciones es conveniente poder manejar como parametros los nombres de los programas.
+    Ejemplo: Tenemos un programa que trabaja con un arreglo al que se le debe aplicar un proceso de ordenamiento. Ese proceso no siempre es el mismo. Seria natural que el nombre del procedimiento que ordena sea un parametro mas.
+
+
+Ambiente de referencia para las referencias no locales dentro del cuerpo del subprograma pasado como parametro.
+    -Debe determinarse cual es el ambiente de referencia no local correcto para un subprograma que se ha invocado y que ha sido pasado como parametro.
+    -Hay varias opciones:
+    #Ligadura shallow o superficial: El ambiente de referencia, es el del subprograma que tiene el parametro formal subprograma.
+    Ejemplo: SNOBOL.
+    #Ligadura deep o profunda: El ambiente es el del subprograma donde esta declarado el subprograma usado como parametro real. Se utiliza en los lenguajes con alcance estatico y estructura de bloque.
+    #El ambiente del subprograma donde se encuentra el llamado a la unidad que tiene un parametro subprograma. Poco natural. (ad hoc)
+
+
+############################
+### UNIDADES GENERICAS #####
+############################
+
+-Una unidad generica es una unidad que puede instanciarse como parametros formales de distinto tipo.
+-Por ejemplo una unidad generica que ordena elementos de un arreglo, podra instanciarse para elementos enteros, flotantes, etc.
+-Como pueden usarse diferentes instancias con diferenstes subprogramas proveen la funcionalidad del parametro subprograma.
